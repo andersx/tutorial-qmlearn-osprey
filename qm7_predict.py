@@ -36,11 +36,12 @@ def pipeline():
             [
                 ('preprocess', qmlearn.preprocessing.AtomScaler(data)),
                 ('representations', qmlearn.representations.CoulombMatrix()),
-                ('kernel', qmlearn.kernels.LaplacianKernel()),
-                ('model', qmlearn.models.KernelRidgeRegression())
+                ('kernel', qmlearn.kernels.LaplacianKernel(sigma=1000)),
+                ('model', qmlearn.models.KernelRidgeRegression(l2_reg=1e-8))
             ],
         )
 
+    # 
     training_indices = np.arange(100)
     model.fit(training_indices)
     
